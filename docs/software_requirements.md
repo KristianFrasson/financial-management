@@ -2,7 +2,7 @@
 
 **Projeto:** Controle Financeiro Pessoal  
 **Versão:** 1.0  
-**Data:** 27/04/2024  
+**Data:** 10/11/2024  
 **Autor:** Kristian
 
 ## 1. Introdução
