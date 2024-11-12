@@ -2,31 +2,48 @@
     "name": "Personal Financial Management System",
     "image": "mcr.microsoft.com/devcontainers/python:3.11",
     "features": {
-      "ghcr.io/devcontainers/features/node:1": {
-        "version": "20"
-      }
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "20"
+        }
     },
-    "postCreateCommand": "pip install -r requirements.txt && cd client && npm install",
+    "postCreateCommand": "python3 -m venv backend/venv && backend/venv/bin/pip install -r backend/requirements.txt && cd frontend && npm install",
     "customizations": {
-      "vscode": {
-        "extensions": [
-          "ms-python.python",
-          "ms-python.vscode-pylance",
-          "esbenp.prettier-vscode",
-          "dbaeumer.vscode-eslint",
-          "editorconfig.editorconfig"
-        ]
-      }
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "esbenp.prettier-vscode",
+                "dbaeumer.vscode-eslint",
+                "editorconfig.editorconfig",
+                "streetsidesoftware.code-spell-checker"
+            ],
+            "settings": {
+                "python.pythonPath": "/workspaces/controle-financeiro-pessoal/backend/venv/bin/python",
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true,
+                "python.formatting.autopep8Path": "/workspaces/controle-financeiro-pessoal/backend/venv/bin/autopep8",
+                "python.formatting.blackPath": "/workspaces/controle-financeiro-pessoal/backend/venv/bin/black",
+                "python.formatting.yapfPath": "/workspaces/controle-financeiro-pessoal/backend/venv/bin/yapf",
+                "python.linting.banditPath": "/workspaces/controle-financeiro-pessoal/backend/venv/bin/bandit",
+                "editor.fontSize": 18
+            }
+        }
     },
     "portsAttributes": {
-      "3000": {
-        "label": "React App",
-        "onAutoForward": "notify"
-      },
-      "5000": {
-        "label": "Flask API",
-        "onAutoForward": "notify"
-      }
-    }
-  }
-  
+        "3000": {
+            "label": "React App",
+            "onAutoForward": "notify"
+        },
+        "5000": {
+            "label": "Flask API",
+            "onAutoForward": "notify"
+        }
+    },
+    "remoteEnv": {
+        "PYTHONPATH": "${containerWorkspaceFolder}/backend"
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder}/backend,target=/workspace/backend,type=bind",
+        "source=${localWorkspaceFolder}/frontend,target=/workspace/frontend,type=bind"
+    ]
+}
