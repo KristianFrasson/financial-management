@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User, Transaction, Category, CreditCard
 from config import get_config  # Importar a função para obter a configuração
 from datetime import datetime
+from routes.auth import auth_bp  # Importar o blueprint de autenticação
 
 app = Flask(__name__)
 app.config.from_object(get_config())  # Carregar a configuração adequada
@@ -17,6 +18,8 @@ db.init_app(app)  # Inicialização do SQLAlchemy
 # Criação das tabelas no banco de dados
 with app.app_context():
     db.create_all()
+
+app.register_blueprint(auth_bp, url_prefix='/auth')  # Registrar o blueprint de autenticação
 
 @app.route('/', methods=['GET'])
 def home():
