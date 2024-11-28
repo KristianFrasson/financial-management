@@ -5,10 +5,10 @@ import axios from 'axios';
 function Login({ setAuth }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/login', { username, password })
+    axios.post('https://probable-palm-tree-vxwx9v564j9hp95-5000.app.github.dev/auth/login', { username, password })
       .then(response => {
         localStorage.setItem('token', response.data.access_token);
         setAuth(true);

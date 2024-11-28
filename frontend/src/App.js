@@ -1,8 +1,9 @@
 // src/App.js
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Login from './Login';
 import Register from './Register';
+import Dashboard from './Dashboard';
 
 function App() {
   const [auth, setAuth] = useState(false);
@@ -12,7 +13,7 @@ function App() {
   useEffect(() => {
     if (auth) {
       const token = localStorage.getItem('token');
-      axios.get('http://localhost:5000/protected', {
+      axios.get('https://probable-palm-tree-vxwx9v564j9hp95-5000.app.github.dev/user-info', {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(response => {
@@ -28,7 +29,10 @@ function App() {
   return (
     <div className="App">
       {auth ? (
-        <h1>{message}</h1>
+        <>
+          <h1>{message}</h1>
+          <Dashboard />
+        </>
       ) : showRegister ? (
         <>
           <Register />

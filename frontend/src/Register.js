@@ -8,7 +8,7 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/register', { username, password })
+    axios.post('https://probable-palm-tree-vxwx9v564j9hp95-5000.app.github.dev/auth/register', { username, password })
       .then(response => {
         alert('Usuário criado com sucesso!');
       })
