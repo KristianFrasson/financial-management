@@ -2,6 +2,8 @@
 import os
 from datetime import timedelta
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 class Config:
     """Configuração base"""
     # Configurações do SQLAlchemy
@@ -18,7 +20,7 @@ class Config:
 class DevelopmentConfig(Config):
     """Configuração de desenvolvimento"""
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///financial_dev.db'
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(basedir, 'instance', 'financial_dev.db')}"
 
 class TestingConfig(Config):
     """Configuração de testes"""
